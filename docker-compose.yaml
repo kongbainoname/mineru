@@ -1,0 +1,24 @@
+services:
+  mineru-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mineru:latest
+    container_name: mineru-api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      MINERU_MODEL_SOURCE: modelscope
+    entrypoint: mineru-api
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    ipc: host
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
