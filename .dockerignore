@@ -1,0 +1,17 @@
+.venv/
+.git/
+.idea/
+output/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+htmlcov/
+.pytest_cache/
+.coverage
+docker/
+docs/
+demo/
+tests/
