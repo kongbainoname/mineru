@@ -10,6 +10,8 @@ services:
       - "8000:8000"
     environment:
       MINERU_MODEL_SOURCE: modelscope
+      MINERU_API_MAX_CONCURRENT_REQUESTS: 2
+      MINERU_PROCESSING_WINDOW_SIZE: 32
     entrypoint: mineru-api
     command:
       - --host
