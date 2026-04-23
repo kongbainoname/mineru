@@ -12,6 +12,8 @@ services:
       MINERU_MODEL_SOURCE: modelscope
       MINERU_API_MAX_CONCURRENT_REQUESTS: 2
       MINERU_PROCESSING_WINDOW_SIZE: 32
+    volumes:
+      - ~/mineru-models:/root/.cache/modelscope/hub/models
     entrypoint: mineru-api
     command:
       - --host
