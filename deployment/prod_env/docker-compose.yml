@@ -111,9 +111,9 @@ services:
 
     ipc: host
 
-    # 生产环境资源限制（根据实际硬件调整）
-    mem_limit: "15g"
-    mem_reservation: "4g"
+    # 生产环境资源限制（8C14G 服务器，留余量给系统）
+    mem_limit: "10g"
+    mem_reservation: "2g"
     cpus: "6"
 
     # 如使用 NVIDIA GPU，取消下面的注释：
