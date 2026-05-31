@@ -1,3 +1,8 @@
+# ==========================================
+# MinerU PDF 解析服务 - 开发环境 Dockerfile
+# ==========================================
+# 与 prod/test 共用代码，仅通过环境变量区分运行时参数
+
 FROM docker.m.daocloud.io/library/python:3.10-slim
 
 # 安装系统依赖：OpenCV、中文字体、ONNXRuntime 等所需库
@@ -19,20 +24,18 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
         libxext6 \
         libxrender-dev \
         libgomp1 \
+        libcurl4-openssl-dev \
         && \
     fc-cache -fv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
-# 复制本地代码（利用 .dockerignore 排除无关文件）
 COPY . .
-
 RUN pip install --timeout 300 --retries 5 -e ".[pipeline]" -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 下载模型（可选；如果本地已有模型建议挂载，注释掉此行以减小镜像）
-RUN mineru-models-download -s modelscope -m pipeline
+# 创建运行必要的目录
+RUN mkdir -p /app/output /app/logs
 
-ENV MINERU_MODEL_SOURCE=modelscope
-ENTRYPOINT ["/bin/bash", "-c", "export MINERU_MODEL_SOURCE=modelscope && exec \"$@\"", "--"]
+EXPOSE 8000
+CMD ["mineru-api", "--host", "0.0.0.0", "--port", "8000"]
