@@ -54,9 +54,9 @@ services:
 
       # ---------- 并发与批处理 ----------
       # API 最大并发请求数
-      - MINERU_API_MAX_CONCURRENT_REQUESTS=8
+      - MINERU_API_MAX_CONCURRENT_REQUESTS=4
       # 批处理窗口大小
-      - MINERU_PROCESSING_WINDOW_SIZE=64
+      - MINERU_PROCESSING_WINDOW_SIZE=32
 
       # ---------- 模型和计算 ----------
       - MINERU_MODEL_SOURCE=modelscope
@@ -112,9 +112,9 @@ services:
     ipc: host
 
     # 生产环境资源限制（根据实际硬件调整）
-    mem_limit: "16g"
+    mem_limit: "15g"
     mem_reservation: "4g"
-    cpus: "8"
+    cpus: "6"
 
     # 如使用 NVIDIA GPU，取消下面的注释：
     # deploy:
