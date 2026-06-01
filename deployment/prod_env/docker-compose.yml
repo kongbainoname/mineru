@@ -6,7 +6,7 @@ version: '3.8'
 # 与 dev/test 环境核心差异：
 #   1. 不挂载 mineru/ 卷（代码稳定不可变）
 #   2. restart=always（自动恢复）
-#   3. 端口 8002（隔离环境）
+#   3. 端口 8000（隔离环境）
 #   4. 关闭 API 文档（MINERU_API_ENABLE_FASTAPI_DOCS=0）
 #   5. 关闭 DEBUG 日志和访问日志
 #   6. 最大资源限制和线程数，充分发挥硬件性能
@@ -34,7 +34,7 @@ services:
     container_name: mineru-api-prod
 
     ports:
-      - "8002:8000"
+      - "8000:8000"
 
     env_file:
       - .env.prod
