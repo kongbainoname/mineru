@@ -13,7 +13,7 @@ RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC
 
 COMPOSE_FILE="docker-compose.yml"
 IMAGE_TAG="mineru:prod"
-PORT=8002
+PORT=8000
 
 if docker compose version &>/dev/null; then
     DOCKER_COMPOSE="docker compose"
