@@ -116,6 +116,15 @@ services:
     mem_reservation: "2g"
     cpus: "6"
 
+    # 启动时预下载模型（若挂载目录已有模型则秒跳过），避免首次请求时才下载
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        echo "=== Checking/Downloading models ==="
+        mineru-models-download -s modelscope -m pipeline
+        echo "=== Starting MinerU API ==="
+        exec mineru-api --host 0.0.0.0 --port 8000
+
     # 如使用 NVIDIA GPU，取消下面的注释：
     # deploy:
     #   resources:
