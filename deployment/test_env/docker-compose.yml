@@ -93,7 +93,7 @@ services:
     ipc: host
 
     # 测试环境资源限制
-    mem_limit: "8g"
+    mem_limit: "6g"
     mem_reservation: "2g"
     cpus: "4"
 
