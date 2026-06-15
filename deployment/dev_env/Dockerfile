@@ -5,6 +5,11 @@
 
 FROM docker.m.daocloud.io/library/python:3.10-slim
 
+# 禁用 pip 缓存、Python 字节码和缓冲，减少镜像体积并便于排查
+ENV PIP_NO_CACHE_DIR=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
 # 安装系统依赖：OpenCV、中文字体、ONNXRuntime 等所需库
 RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
         sed -i 's|http://deb.debian.org|http://mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources && \
@@ -32,10 +37,11 @@ RUN if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
 
 WORKDIR /app
 COPY . .
-RUN pip install --timeout 300 --retries 5 -e ".[pipeline]" -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 创建运行必要的目录
-RUN mkdir -p /app/output /app/logs
+# 安装 Python 依赖（--no-cache-dir 避免 wheel 缓存进入镜像层）
+# 并将 mkdir 合并到同一层，减少镜像层数
+RUN pip install --no-cache-dir --timeout 300 --retries 5 -e ".[pipeline]" -i https://pypi.tuna.tsinghua.edu.cn/simple && \
+    mkdir -p /app/output /app/logs
 
 EXPOSE 8000
 CMD ["mineru-api", "--host", "0.0.0.0", "--port", "8000"]

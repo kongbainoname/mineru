@@ -1,7 +1,5 @@
+# Python virtual environment and cache
 .venv/
-.git/
-.idea/
-output/
 __pycache__/
 *.pyc
 *.pyo
@@ -11,7 +9,39 @@ build/
 htmlcov/
 .pytest_cache/
 .coverage
-docker/
+.mypy_cache/
+.ruff_cache/
+
+# IDE and editor config
+.idea/
+.vscode/
+.claude/
+*.iml
+
+# Git
+.git/
+.github/
+.gitattributes
+
+# Project outputs and runtime data (will be mounted as volumes)
+output/
+logs/
+models/
+data/
+*.log
+
+# Environment files (security: do not copy secrets into image)
+.env
+.env.*
+*.env
+
+# Documentation, examples and deployment helpers
 docs/
 demo/
+docker/
 tests/
+
+# Deployment configs (dockerfile paths still work via compose/build context)
+deployment/*/.env.*
+deployment/*/.env
+deployment/*/build.sh
