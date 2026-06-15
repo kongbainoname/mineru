@@ -39,17 +39,17 @@ services:
     environment:
       # ---------- 线程与性能 ----------
       # PDF 渲染线程数（默认 4），测试环境使用默认值
-      - MINERU_PDF_RENDER_THREADS=4
+      - MINERU_PDF_RENDER_THREADS=2
       # PDF 渲染超时（秒）
       - MINERU_PDF_RENDER_TIMEOUT=300
       # ONNX Runtime 线程数
-      - OMP_NUM_THREADS=4
+      - OMP_NUM_THREADS=2
 
       # ---------- 并发与批处理 ----------
       # API 最大并发请求数（默认 3），测试环境提高
-      - MINERU_API_MAX_CONCURRENT_REQUESTS=6
+      - MINERU_API_MAX_CONCURRENT_REQUESTS=2
       # 批处理窗口大小（pipeline 后端每批最大页数）
-      - MINERU_PROCESSING_WINDOW_SIZE=64
+      - MINERU_PROCESSING_WINDOW_SIZE=16
 
       # ---------- 模型和计算 ----------
       - MINERU_MODEL_SOURCE=modelscope
