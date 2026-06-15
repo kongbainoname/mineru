@@ -27,6 +27,7 @@ htmlcov/
 output/
 logs/
 models/
+deployment/models/
 data/
 *.log
 

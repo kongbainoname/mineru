@@ -46,8 +46,8 @@ container_running() {
 }
 
 ensure_dirs() {
-    mkdir -p output logs models
-    chmod -R 777 output logs models 2>/dev/null || true
+    mkdir -p output logs ../models
+    chmod -R 777 output logs ../models 2>/dev/null || true
 }
 
 do_build() {
