@@ -75,8 +75,8 @@ services:
       - MINERU_API_ENABLE_FASTAPI_DOCS=true
 
     volumes:
-      # 模型缓存持久化（统一放到 deployment/models/，多环境共享）
-      - ../models:/root/.cache/modelscope/hub/models
+      # 模型缓存持久化（挂载整个 modelscope hub 目录，统一放到 deployment/models/，多环境共享）
+      - ../models:/root/.cache/modelscope/hub
       # 输出目录持久化
       - ./output:/app/output
       # 日志持久化
