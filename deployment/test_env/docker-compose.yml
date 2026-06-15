@@ -54,7 +54,7 @@ services:
       # ---------- 模型和计算 ----------
       - MINERU_MODEL_SOURCE=modelscope
       # 测试环境通常使用 CPU，有 GPU 可改为 cuda
-      - MINERU_DEVICE_MODE=auto
+      - MINERU_DEVICE_MODE=cpu
 
       # ---------- 功能开关 ----------
       - MINERU_FORMULA_ENABLE=true
